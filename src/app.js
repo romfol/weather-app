@@ -2,14 +2,35 @@ const path = require("path");
 const express = require("express");
 
 const app = express();
+
+//Paths for webpack config
 const publicDirectoryPath = path.join(__dirname, "../public");
+const viewsPath = path.join(__dirname, "../templates");
 
-app.set("view engine", "hbs")
+//Setup handlebars and views location
+app.set("view engine", "hbs");
+app.set("views", viewsPath);
 
+//SETUP STATIC DIRECTORY TO SERVE
 app.use(express.static(publicDirectoryPath));
 
 app.get("", (req, res) => {
-  res.render("index");
+  res.render("index", {
+    title: "Weather APP",
+    author: "romfol",
+  });
+})
+
+app.get("/about", (req, res) => {
+  res.render("about", {
+    name: "romfol",
+  });
+})
+
+app.get("/help", (req, res) => {
+  res.render("help", {
+    title: "Help page"
+  });
 })
 
 app.get("/weather", (req, res) => {
