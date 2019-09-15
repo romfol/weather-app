@@ -1,16 +1,17 @@
 const path = require("path");
 const express = require("express");
+const hbs  = require("hbs");
 
 const app = express();
 
 //Paths for webpack config
 const publicDirectoryPath = path.join(__dirname, "../public");
-const viewsPath = path.join(__dirname, "../templates");
-
+const viewsPath = path.join(__dirname, "../templates/views");
+const partialsPath = path.join(__dirname, "../templates/partials");
 //Setup handlebars and views location
 app.set("view engine", "hbs");
 app.set("views", viewsPath);
-
+hbs.registerPartials(partialsPath);
 //SETUP STATIC DIRECTORY TO SERVE
 app.use(express.static(publicDirectoryPath));
 
@@ -23,13 +24,15 @@ app.get("", (req, res) => {
 
 app.get("/about", (req, res) => {
   res.render("about", {
-    name: "romfol",
+    title: "About page",
+    author: "romfol",
   });
 })
 
 app.get("/help", (req, res) => {
   res.render("help", {
-    title: "Help page"
+    title: "Help page",
+    author: "romfol",
   });
 })
 
