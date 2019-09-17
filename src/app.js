@@ -39,9 +39,15 @@ app.get("/help", (req, res) => {
 })
 
 app.get("/weather", (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      error: "Address is not provided"     
+    })
+  }
+
   res.send({
     forecast: 'snowing',
-    location: 'Cherkasy',
+    location: req.query.address,
   });
 })
 
