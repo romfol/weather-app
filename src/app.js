@@ -47,22 +47,23 @@ app.get("/weather", (req, res) => {
     })
   }
 
-  geocode(req.query.address, (error, data) => {
+  geocode(req.query.address, (error, {latitude, longitude, location} = {}) => {
     if (error) {
       return  res.send({
-        error: "Address not found",
+        error
       });
     }
 
-    forecast(data.latitude, data.longitude, (error, forecastData) => {
+    forecast(latitude, longitude, (error, forecastData) => {
       if (error) {
         return  res.send({
           error: "Forecast not found",
         }); 
       }
       res.send({
-      forecast: forecastData,
-      address: data.location,
+        forecast: forecastData,
+        location,
+        address: req.query.address,
       });
     });
   });
