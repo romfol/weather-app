@@ -1,17 +1,25 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>{{title}}</title>
   <link rel="icon" href="img/weather.png">
-  <link rel="stylesheet" href="css/styles.css"/>
-  <script src="/js/app.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
+
 <body>
-  <div class="main-content">
+  <main class="main-content">
     {{>header}}
     <p>{{title}}</p>
-  </div>
-  {{>footer}}
+    <p>Use this form to get weather</p>
+    <form action="">
+      <input placeholder="Location" type="text">
+      <button>Search</button>
+    </form>
+    {{>footer}}
+  </main>
+  <script src="/js/app.js"></script>
 </body>
+
 </html>
